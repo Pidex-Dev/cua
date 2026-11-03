@@ -514,8 +514,9 @@ jobs:
           # Release Please's draft keeps its assets private (downloads 404);
           # publish it now that every asset is attached. Staging builds and
           # X.Y.Z-suffix versions are prereleases, never latest.
-          FLAGS=(--draft=false)
-          [ "$PRERELEASE" = true ] && FLAGS+=(--prerelease --latest=false)
+          # Never the repo-wide "Latest": only Cua Spaces is (release-latest-policy test).
+          FLAGS=(--draft=false --latest=false)
+          [ "$PRERELEASE" = true ] && FLAGS+=(--prerelease)
           if [ "$CANONICAL" != true ] || grep -q UNSIGNED signing/*.txt; then
             label="staging"; [ "$CANONICAL" = true ] && label="test"
             # Name the unsigned platforms: "UNSIGNED: windows-x64".
