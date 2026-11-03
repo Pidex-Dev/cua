@@ -44,6 +44,18 @@ jobs:
           uv run --no-project --python 3.12 --with pytest==8.4.2
           python -m pytest -q tests probes/tests swift/tests
 
+      - name: Checker tests of the 42-task set's pack tasks
+        working-directory: libs/cua-driver-bench/taskpack/tasks/v2
+        run: uv run --no-project --python 3.12 python run_tests.py
+
+      - name: 42-task manifest, selectors, pins and docs agree
+        working-directory: libs/cua-driver-bench/automated-eval/macos_bench
+        run: uv run --no-project --python 3.12 python tools/taskset.py check
+
+      - name: Fairness and health checks
+        working-directory: libs/cua-driver-bench/fairness
+        run: uv run --no-project --python 3.9 python -m unittest discover -s tests
+
   linux-desktop:
     name: Linux headless desktop contracts (no model)
     runs-on: ubuntu-latest

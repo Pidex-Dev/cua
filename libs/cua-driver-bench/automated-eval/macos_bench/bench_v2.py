@@ -35,6 +35,8 @@ BENCH_VERSION = 2
 CATEGORIES: dict[str, str] = {  # report order
     "multi_app": "Multi-app workflows",
     "web_forms": "Web apps & forms",
+    "native_apps": "Native macOS apps",  # the 42-task set
+    "documents": "Documents & spreadsheets",  # the 42-task set
     "precision": "Precision interactions",
     "interruptions": "Interruptions & recovery",
 }
@@ -53,6 +55,58 @@ V2_TASKS: tuple[str, ...] = (
     "IR-03",
     "IR-04",
 )
+# The 42-task set: the ten tasks above, then 32 pack tasks written from scratch for it, in schedule order grouped by
+# category. Their pack trees are in ../../taskpack/tasks/v2/; ../../taskpack/v2-42-taskset.json lists them with their
+# category, OS availability and split (public, or held out of this repository). `--task-set` selects a set; the
+# default stays `v2`, so earlier runs reproduce.
+V2_NEW_TASKS: tuple[str, ...] = (
+    "MA-01", "MA-02", "MA-03", "MA-04",
+    "WF-01", "WF-02", "WF-03", "WF-04", "WF-05", "WF-06", "WF-07", "WF-08",
+    "NA-01", "NA-02", "NA-03", "NA-04", "NA-05", "NA-06", "NA-07",
+    "DS-01", "DS-02", "DS-03", "DS-04", "DS-05", "DS-06", "DS-07",
+    "PR-01", "PR-02", "PR-03",
+    "IR-05", "IR-06", "IR-07",
+)  # fmt: skip
+V2_42_TASKS: tuple[str, ...] = V2_TASKS + V2_NEW_TASKS
+TASKSET_FILE = Path(__file__).resolve().parents[2] / "taskpack" / "v2-42-taskset.json"
+SPLITS = ("public", "heldout")
+
+
+def load_taskset(path: Path | None = None) -> dict[str, Any]:
+    """The 42-task manifest: one entry per task with `id`, `category`, `split` and `os`."""
+    return json.loads((path or TASKSET_FILE).read_text("utf-8"))
+
+
+def split_of(task_id: str, taskset: dict[str, Any] | None = None) -> str:
+    """`public` or `heldout`. Tasks not in the manifest (the ten core tasks are listed too) default to public."""
+    for entry in (taskset or load_taskset())["tasks"]:
+        if entry["id"] == task_id:
+            return str(entry["split"])
+    return "public"
+
+
+def task_sets(taskset: dict[str, Any] | None = None) -> dict[str, tuple[str, ...]]:
+    """Named task sets for `--task-set`. `-public` and `-heldout` keep schedule order and only that split."""
+    data = taskset or load_taskset()
+    split = {e["id"]: e["split"] for e in data["tasks"]}
+    sets: dict[str, tuple[str, ...]] = {
+        "v2": V2_TASKS,
+        "v2-42": V2_42_TASKS,
+        "v2-new": V2_NEW_TASKS,
+    }
+    for name in ("v2-42", "v2-new"):
+        for part in SPLITS:
+            sets[f"{name}-{part}"] = tuple(t for t in sets[name] if split.get(t, "public") == part)
+    return sets
+
+
+def tasks_for_condition(
+    task_ids: list[str], condition: str | None, specs: dict[str, dict[str, Any]]
+) -> list[str]:
+    """The tasks of one condition: a task whose task.json lists `conditions` runs only in those."""
+    return [t for t in task_ids if condition in (specs.get(t, {}).get("conditions") or CONDITIONS)]
+
+
 # v1 tasks that are not in v2, and why (the S/G split is dropped).
 NOT_IN_V2: dict[str, str] = {
     "CDB-S01": "its end state needs a source-code fix and a test; no GUI-only version without changing the pack",
