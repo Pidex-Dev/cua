@@ -1,0 +1,51 @@
+name: Pidex CUA release
+on:
+  push:
+    tags: ['pidex-cua-v*']
+permissions:
+  contents: read
+jobs:
+  release:
+    if: github.repository == 'Pidex-Dev/cua'
+    runs-on: windows-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: Swatinem/rust-cache@e9d7b9f1e587218970671bac74e5511ed9506e6a
+        with:
+          workspaces: libs/cua-driver/rust -> target
+      - name: Test Pidex identity and target binding
+        run: |
+          cargo test --locked --manifest-path libs/cua-driver/rust/Cargo.toml -p cpx-cua --target x86_64-pc-windows-msvc
+          if ($LASTEXITCODE -ne 0) { throw 'CUA tests failed' }
+          cargo test --locked --manifest-path libs/cua-driver/rust/Cargo.toml -p cua-driver-core --no-default-features --target x86_64-pc-windows-msvc --test snapshot_invariants
+          if ($LASTEXITCODE -ne 0) { throw 'Snapshot tests failed' }
+      - name: Build release runtime
+        run: |
+          cargo build --locked --release --manifest-path libs/cua-driver/rust/Cargo.toml -p cpx-cua --target x86_64-pc-windows-msvc
+          if ($LASTEXITCODE -ne 0) { throw 'CUA build failed' }
+      - name: Verify and prepare assets
+        run: |
+          $exe = 'libs/cua-driver/rust/target/x86_64-pc-windows-msvc/release/cpx-cua.exe'
+          ./pidex/VerifyRuntime.ps1 -Executable $exe
+          New-Item -ItemType Directory -Path pidex-release | Out-Null
+          Copy-Item -LiteralPath $exe -Destination pidex-release/cpx-cua.exe
+          Compress-Archive -Path pidex/licenses -DestinationPath pidex-release/licenses.zip
+          $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $exe).Hash.ToLowerInvariant()
+          "$hash  cpx-cua.exe" | Set-Content -Encoding utf8NoBOM pidex-release/SHA256SUMS
+          "Source: $env:GITHUB_SHA`nUpstream: 32b34fbc75abeb96af77df49ae0da72328e67707`nPlatform: Windows x64`nInterface: CPX-CUA / x-cpx-identity-v1 / MCP 2025-06-18" | Set-Content -Encoding utf8NoBOM pidex-release/SOURCE.md
+      - name: Publish immutable release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view $env:GITHUB_REF_NAME --repo $env:GITHUB_REPOSITORY 2>$null
+          if ($LASTEXITCODE -eq 0) { throw 'Release already exists; publish a new version' }
+          gh release create $env:GITHUB_REF_NAME pidex-release/* --repo $env:GITHUB_REPOSITORY --verify-tag --title "Pidex CUA $env:GITHUB_REF_NAME" --notes-file pidex-release/SOURCE.md --latest=false
+          if ($LASTEXITCODE -ne 0) { throw 'Release publication failed' }

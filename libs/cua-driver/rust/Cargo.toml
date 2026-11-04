@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+    "crates/cpx-cua",
     "crates/cua-driver",
     "crates/cua-driver-contract",
     "crates/cua-driver-sdk",

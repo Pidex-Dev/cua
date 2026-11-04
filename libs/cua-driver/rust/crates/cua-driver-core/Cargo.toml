@@ -6,7 +6,7 @@ license.workspace = true
 publish = false
 
 [features]
-default = ["yaml", "rego"]
+default = ["yaml"]
 yaml = ["dep:regex"]
 rego = ["dep:regorus"]
 

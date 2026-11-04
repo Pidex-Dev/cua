@@ -235,6 +235,7 @@ const PRIVATE_OBSERVATION_OPERATIONS: &[&str] = &[
     "verify_state",
     "list_apps",
     "list_windows",
+    "cpx_apps",
     "debug_window_info",
     "get_browser_state",
     "browser_dialog[action=inspect]",
@@ -742,6 +743,7 @@ pub fn enforcement_adapters_for_call(
             | "verify_state"
             | "list_apps"
             | "list_windows"
+            | "cpx_apps"
             | "debug_window_info"
             | "get_browser_state"
             | "escalate_session"
@@ -911,6 +913,7 @@ pub fn advertised_risk_for(tool: &str) -> RiskAssessment {
         | "clipboard_read"
         | "list_apps"
         | "list_windows"
+        | "cpx_apps"
         | "debug_window_info"
         | "check_permissions"
         | "get_accessibility_tree"
@@ -1028,6 +1031,7 @@ pub fn classify_tool_call(tool: &str, args: &Value) -> RiskAssessment {
         "get_accessibility_tree"
         | "list_apps"
         | "list_windows"
+        | "cpx_apps"
         | "debug_window_info"
         | "get_browser_state"
         | "escalate_session"
