@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.11.0](https://github.com/trycua/cua/compare/cua-spacesd-v0.10.1...cua-spacesd-v0.11.0) (2026-11-04)
+
+
+### Features
+
+* **spaces:** ask first, CI runners, TCP shares, secure networks and the phone app, behind experiments ([#6355](https://github.com/trycua/cua/issues/6355)) ([8cfff8e](https://github.com/trycua/cua/commit/8cfff8ef0e4a904c1534eac44cea3d65e741e6fd))
+* **spaces:** Secure Spaces, child Spaces, conformance, space jobs and the macOS developer-tools image, behind experiments ([#6306](https://github.com/trycua/cua/issues/6306)) ([4715a72](https://github.com/trycua/cua/commit/4715a723a450610cdf77f688776c1fdd40660149))
+* **spaces:** the new setup prepares the first Space while you set up, behind Labs (CUA-2851) ([#6360](https://github.com/trycua/cua/issues/6360)) ([2829e00](https://github.com/trycua/cua/commit/2829e00b180dfb08ca5ff4cbd7c95e0a14ad3409))
+* **spaces:** Windows Spaces on nested AWS KVM hosts (windows-kvm experiment, off by default) ([#6358](https://github.com/trycua/cua/issues/6358)) ([6bdfdc5](https://github.com/trycua/cua/commit/6bdfdc53972063fa1def9cc8886d627404c53ffe))
+
+
+### Bug Fixes
+
+* **ci:** quarantine the linux-kvm concurrent flake, fix the TCC seed lock and the Windows portmap pick ([#6365](https://github.com/trycua/cua/issues/6365)) ([16d5681](https://github.com/trycua/cua/commit/16d568184853eea3ea717f67a035b43527c1315b))
+* **cua-driver:** list bound tabs in the order the browser reports them ([#5527](https://github.com/trycua/cua/issues/5527)) ([59eace1](https://github.com/trycua/cua/commit/59eace173488fca6e871b5226d3d6f17120d93a8))
+* **cua-relay:** mint a new service token on a 401 and refresh at half-life (CUA-2959) ([#6348](https://github.com/trycua/cua/issues/6348)) ([eed1e78](https://github.com/trycua/cua/commit/eed1e7830867fbb3f11f209979897a0ac76fa9fb))
+* **cua-relay:** the per-token computer limit holds when joins race ([#6391](https://github.com/trycua/cua/issues/6391)) ([83b9449](https://github.com/trycua/cua/commit/83b94491d637cbb416844e18ee713f8e9959a3cd))
+* **cua-spacesd:** stream the picture when the desktop audio cannot start ([#6400](https://github.com/trycua/cua/issues/6400)) ([0571c14](https://github.com/trycua/cua/commit/0571c14d9cb4c84886b3994392683de579502340))
+* **spaces:** reach macOS VMs over vsock, not Local Network or VPN routes (CUA-3139) ([#6380](https://github.com/trycua/cua/issues/6380)) ([37af9df](https://github.com/trycua/cua/commit/37af9dffdd0a79d9bcbcee0667832272b556435a))
+
 ## [0.10.1](https://github.com/trycua/cua/compare/cua-spacesd-v0.10.0...cua-spacesd-v0.10.1) (2026-11-02)
 
 
