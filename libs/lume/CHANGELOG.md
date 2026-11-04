@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.7.0](https://github.com/trycua/cua/compare/lume-v0.6.1...lume-v0.7.0) (2026-11-04)
+
+
+### Features
+
+* compat gateways for E2B and Daytona, Hetzner as your own cloud, the elastic pool, cua share and the public relay ([#5778](https://github.com/trycua/cua/issues/5778)) ([d4f3f80](https://github.com/trycua/cua/commit/d4f3f8063d7b30a3b3bda2b4c05c565a9dfcb460))
+* **lume:** install source builds as lume-local, beside the released lume ([#5804](https://github.com/trycua/cua/issues/5804)) ([86aae66](https://github.com/trycua/cua/commit/86aae66ff31135ef6ba1036315b55b5f8892fc15))
+* **spaces:** ask first, CI runners, TCP shares, secure networks and the phone app, behind experiments ([#6355](https://github.com/trycua/cua/issues/6355)) ([8cfff8e](https://github.com/trycua/cua/commit/8cfff8ef0e4a904c1534eac44cea3d65e741e6fd))
+
+
+### Bug Fixes
+
+* **lume:** verify VM owner before stopping ([524b7c4](https://github.com/trycua/cua/commit/524b7c43276fef51f9f01d9d74e6dfc2f6d9d519))
+* **spaces:** reach macOS VMs over vsock, not Local Network or VPN routes (CUA-3139) ([#6380](https://github.com/trycua/cua/issues/6380)) ([37af9df](https://github.com/trycua/cua/commit/37af9dffdd0a79d9bcbcee0667832272b556435a))
+
 ## [0.6.1](https://github.com/trycua/cua/compare/lume-v0.6.0...lume-v0.6.1) (2026-10-04)
 
 
