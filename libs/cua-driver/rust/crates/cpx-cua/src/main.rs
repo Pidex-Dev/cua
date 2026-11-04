@@ -89,8 +89,7 @@ mod host_tests {
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let mut registry = platform_windows::register_tools();
-    registry.register_session_tools();
+    let registry = platform_windows::register_tools();
     let provider = CpxProvider { registry };
     let mut protocol = ProtocolSession::default();
     let mut reader = BufReader::new(tokio::io::stdin());
