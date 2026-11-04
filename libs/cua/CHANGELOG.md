@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.11.0](https://github.com/trycua/cua/compare/cua-sdk-v0.10.1...cua-sdk-v0.11.0) (2026-11-04)
+
+
+### Features
+
+* **cua-driver:** opt-in refusal of ungranted macOS Automation scripting ([#5777](https://github.com/trycua/cua/issues/5777)) ([8d9ec70](https://github.com/trycua/cua/commit/8d9ec709d2e2a73f6ebdaf5b5d838d2b5baf0014))
+* **spaces:** ask first, CI runners, TCP shares, secure networks and the phone app, behind experiments ([#6355](https://github.com/trycua/cua/issues/6355)) ([8cfff8e](https://github.com/trycua/cua/commit/8cfff8ef0e4a904c1534eac44cea3d65e741e6fd))
+* **spaces:** Secure Spaces, child Spaces, conformance, space jobs and the macOS developer-tools image, behind experiments ([#6306](https://github.com/trycua/cua/issues/6306)) ([4715a72](https://github.com/trycua/cua/commit/4715a723a450610cdf77f688776c1fdd40660149))
+* **spaces:** the new setup prepares the first Space while you set up, behind Labs (CUA-2851) ([#6360](https://github.com/trycua/cua/issues/6360)) ([2829e00](https://github.com/trycua/cua/commit/2829e00b180dfb08ca5ff4cbd7c95e0a14ad3409))
+* **spaces:** Windows Spaces on nested AWS KVM hosts (windows-kvm experiment, off by default) ([#6358](https://github.com/trycua/cua/issues/6358)) ([6bdfdc5](https://github.com/trycua/cua/commit/6bdfdc53972063fa1def9cc8886d627404c53ffe))
+* **telemetry:** report which step a Space start failed at (CUA-3139) ([#6377](https://github.com/trycua/cua/issues/6377)) ([4d985c1](https://github.com/trycua/cua/commit/4d985c120924e3210b9fdcd60907377a74eae579))
+
+
+### Bug Fixes
+
+* **cua-daemon:** list Spaces added by address in the sandbox list ([#6414](https://github.com/trycua/cua/issues/6414)) ([7cf6874](https://github.com/trycua/cua/commit/7cf68742443419c2c7892c098473182338fc5122))
+* **cua-daemon:** name the holder's pid when a second daemon is refused on Windows ([#6402](https://github.com/trycua/cua/issues/6402)) ([c4b67c4](https://github.com/trycua/cua/commit/c4b67c4a5fec7cf65e6056c6ea70f229fd469a86))
+* **cua-mesh:** a mesh forward keeps its UDP port when Windows excludes a UDP range ([#6418](https://github.com/trycua/cua/issues/6418)) ([d685580](https://github.com/trycua/cua/commit/d6855806e6eebfa9813b91986f59931e7f103a51))
+* **spaces:** reach macOS VMs over vsock, not Local Network or VPN routes (CUA-3139) ([#6380](https://github.com/trycua/cua/issues/6380)) ([37af9df](https://github.com/trycua/cua/commit/37af9dffdd0a79d9bcbcee0667832272b556435a))
+* **spaces:** three first-run fixes for the new setup (CUA-3193) ([#6409](https://github.com/trycua/cua/issues/6409)) ([a6005a4](https://github.com/trycua/cua/commit/a6005a4a490e4cfbc5596c419ce4d0209a1be4d7))
+
 ## [0.10.1](https://github.com/trycua/cua/compare/cua-sdk-v0.10.0...cua-sdk-v0.10.1) (2026-11-02)
 
 
