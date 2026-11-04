@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.21.0](https://github.com/trycua/cua/compare/cua-spaces-v0.20.0...cua-spaces-v0.21.0) (2026-11-04)
+
+
+### Features
+
+* **spaces:** ask first, CI runners, TCP shares, secure networks and the phone app, behind experiments ([#6355](https://github.com/trycua/cua/issues/6355)) ([8cfff8e](https://github.com/trycua/cua/commit/8cfff8ef0e4a904c1534eac44cea3d65e741e6fd))
+
+
+### Bug Fixes
+
+* **ci:** the macOS release build installs Go for the network gateway ([#6422](https://github.com/trycua/cua/issues/6422)) ([96dd383](https://github.com/trycua/cua/commit/96dd3838ecd3084a7c7274cf83309188d4e4c94d))
+
 ## [0.20.0](https://github.com/trycua/cua/compare/cua-spaces-v0.19.4...cua-spaces-v0.20.0) (2026-11-03)
 
 
